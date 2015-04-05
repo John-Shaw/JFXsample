@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="JFXsample">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/JFXsample/JFXsample.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
