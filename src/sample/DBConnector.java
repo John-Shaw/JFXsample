@@ -16,6 +16,13 @@ import java.sql.*;
  * Created by John Show on 2015/4/5.
  */
 public class DBConnector {
+    private String url="jdbc:mysql://210.28.164.6:3306/car";
+    private String user = "root";
+    private String password = "";
+
+
+    private String docFileName;
+
     public DBConnector() {
 
     }
@@ -25,9 +32,8 @@ public class DBConnector {
         Statement st = null;
         ResultSet rs = null;
         System.out.println("start link db");
-        String url = "jdbc:mysql://210.28.164.6:3306/car";
-        String user = "root";
-        String password = "";
+
+
 
         try {
             con = DriverManager.getConnection(url, user, password);
@@ -62,6 +68,55 @@ public class DBConnector {
         }
     }
 
+    public void testDownloadFiel(String id)
+    {
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+
+        try {
+            con = DriverManager.getConnection(url, user, password);
+
+            st = con.createStatement();
+
+
+            rs = st.executeQuery("SELECT PTextAddress FROM car.part_car\n" +
+                    "where PID="+id);
+
+
+            if (rs.next()) {
+                docFileName = rs.getString(1);
+            }
+
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+
+            } catch (SQLException ex) {
+
+            }
+        }
+
+        String url = "http://210.28.164.6:8080/WebApplication1/files/"+docFileName;
+        String saveFIle = "temp/"+docFileName;
+        if(httpDownload(url,saveFIle))
+            System.out.println("download file sucessfully");
+
+
+    }
+
+
 
 
     public static boolean httpDownload(String httpUrl,String saveFile){
@@ -86,7 +141,7 @@ public class DBConnector {
             byte[] buffer = new byte[1204];
             while ((byteread = inStream.read(buffer)) != -1) {
                 bytesum += byteread;
-                System.out.println(bytesum);
+//                System.out.println(bytesum);
                 fs.write(buffer, 0, byteread);
             }
             return true;
