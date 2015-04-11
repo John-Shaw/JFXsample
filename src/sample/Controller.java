@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -65,11 +66,14 @@ public class Controller implements Initializable{
 
 
         if (this.idTextField.getText().isEmpty()){
-            JOptionPane.showConfirmDialog(null,"please input ID number");
-        }else {
+            Alert mesBox = new Alert(Alert.AlertType.ERROR);
+            mesBox.setTitle("ERROR!");
+            mesBox.setContentText("please input ID number");
+            mesBox.showAndWait();
+        } else {
             //todo
 
-            System.out.println("file://"+ localPath +"/temp/videoviewdemo.mp4");
+            System.out.println("file://" + localPath + "/temp/videoviewdemo.mp4");
             Media media = new Media("file://"+ localPath +"/temp/videoviewdemo.mp4");
 
             final MediaPlayer player = new MediaPlayer(media);
