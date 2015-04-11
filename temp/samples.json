@@ -1,0 +1,186 @@
+{
+  "id": "12345",
+  "type": [
+    {
+      "name": "蓄电池",
+      "option": [
+        {
+          "label": "标牌信息",
+          "option1": "已到使用寿命",
+          "option2": "未到使用寿命"
+        },
+        {
+          "label": "蓄电池容量",
+          "option1": "正常",
+          "option2": "偏低"
+        }
+      ]
+    },
+    {
+      "name": "废液",
+      "option": [
+        {
+          "label": "是否缺失",
+          "option1": "是",
+          "option2": "否"
+        },
+        null
+      ]
+    },
+    {
+      "name": "车门",
+      "option": [
+        {
+          "label": "是否缺失",
+          "option1": "是",
+          "option2": "否"
+        }, null
+      ]
+    },
+    {
+      "name": "舱盖",
+      "option": [
+        {
+          "label": "是否缺失",
+          "option1": "是",
+          "option2": "否"
+        }, null
+      ]
+    },
+    {
+      "name": "车轮",
+      "option": [
+        {
+          "label": "是否缺失",
+          "option1": "是",
+          "option2": "否"
+        }, null
+      ]
+    },
+    {
+      "name": "挡风玻璃",
+      "option": [
+        {
+          "label": "是否有裂纹",
+          "option1": "是",
+          "option2": "否"
+        }, null
+      ]
+    },
+    {
+      "name": "车顶",
+      "option": [
+        {
+          "label": "是否缺失",
+          "option1": "是",
+          "option2": "否"
+        }, null
+      ]
+    },
+    {
+      "name": "立柱",
+      "option": [
+        {
+          "label": "是否缺失",
+          "option1": "是",
+          "option2": "否"
+        }, null
+      ]
+    },
+    {
+      "name": "方向盘",
+      "option": [
+        {
+          "label": "是否缺失",
+          "option1": "是",
+          "option2": "否"
+        }, null
+      ]
+    },
+    {
+      "name": "座椅",
+      "option": [
+        {
+          "label": "外观",
+          "option1": "整体良好",
+          "option2": "不良好"
+        },
+        {
+          "label": "座椅前后左右，伤心位置及倾角能否自动调节",
+          "option1": "能",
+          "option2": "不能"
+        }
+      ]
+    },
+    {
+      "name": "仪表盘",
+      "option": [
+        {
+          "label": "是否缺失",
+          "option1": "是",
+          "option2": "否"
+        }, null
+      ]
+    },
+    {
+      "name": "发动机",
+      "option": [
+        {
+          "label": "是否缺失",
+          "option1": "是",
+          "option2": "否"
+        }, null
+      ]
+    },
+    {
+      "name": "变速器",
+      "option": [
+        {
+          "label": "是否缺失",
+          "option1": "是",
+          "option2": "否"
+        }, null
+      ]
+    },
+    {
+      "name": "悬挂",
+      "option": [
+        {
+          "label": "用力按下保险杠，然后松开",
+          "option1": "汽车有2-3次跳",
+          "option2": "无跳跃或未跳跃2-3次"
+        },
+        {
+          "label": "弹性元件断裂，尤其是弹簧工作圈起初部位（1圈）附近",
+          "option1": "是",
+          "option2": "否"
+        }
+      ]
+    },
+    {
+      "name": "传动轴",
+      "option": [
+        {
+          "label": "是否断裂",
+          "option1": "是",
+          "option2": "否"
+        },
+        {
+          "label": "是否宏观断裂",
+          "option1": "是",
+          "option2": "否"
+        }
+      ]
+    },
+    {
+      "name": "油箱",
+      "option": [
+        {
+          "label": "是否缺失",
+          "option1": "是",
+          "option2": "否"
+        }, null
+      ]
+    }
+  ]
+}

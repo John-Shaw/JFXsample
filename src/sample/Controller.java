@@ -1,24 +1,26 @@
 package sample;
 
+
+import com.google.gson.Gson;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.extractor.WordExtractor;
 
 import javax.swing.*;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
-import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.hwpf.extractor.WordExtractor;
-import org.apache.poi.hwpf.usermodel.*;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 
 public class Controller implements Initializable{
@@ -27,8 +29,30 @@ public class Controller implements Initializable{
     public AnchorPane wordPanel;
     public TextArea wordViewer;
     public MediaView mediaView;
+    public ComboBox selectBox;
     private String localPath;
     private DBConnector db;
+
+    private ObservableList<String> options =
+            FXCollections.observableArrayList(
+                    "蓄电池",
+                    "废液",
+                    "车门",
+                    "舱盖",
+                    "车轮",
+                    "挡风玻璃",
+                    "车顶",
+                    "立柱",
+                    "方向盘",
+                    "座椅",
+                    "仪表盘",
+                    "发动机",
+                    "变速器",
+                    "悬挂",
+                    "传动轴",
+                    "油箱"
+            );
+
 
 
 
@@ -93,6 +117,7 @@ public class Controller implements Initializable{
                     }
                 }
                 wordViewer.setText(text);
+
 //                    String[] s=new String[20];
 //                    FileInputStream in=new FileInputStream(new File(localPath+"/temp/test.doc"));
 //                    POIFSFileSystem pfs=new POIFSFileSystem(in);
@@ -139,12 +164,56 @@ public class Controller implements Initializable{
             System.out.println(localPath);
             idTextField.requestFocus();
 
+            selectBox.setItems(options);
+
+        }
+
+        public String pathFix(String path){
+            return path.replaceAll("\\\\", "/");
         }
 
         public void testDBConnect(ActionEvent actionEvent) {
 
-            db =new DBConnector();
-            db.testDownloadFiel("32");
+//            db =new DBConnector();
+//            db.testDownloadFiel("32");
+            String path = localPath + "/temp/samples.json";
+            readDataFromJson(path);
+
+            System.out.println(carMes.getType()[10].getOption()[0].getLabel());
 
         }
+
+    private CarMes carMes;
+
+    public void selectItem(ActionEvent actionEvent) {
+    }
+
+    public void readDataFromJson(String path){
+        //读取json文件，保存到String json中
+        String fileName=path;
+        File file=new File(fileName);
+        StringBuffer sb = new StringBuffer() ;
+        String line;
+        BufferedReader br=null;
+        try {
+            br=new BufferedReader(new FileReader(file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            while((line=br.readLine())!=null){
+                sb.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String json=sb.toString();
+
+        Gson gson = new Gson();
+
+        carMes=gson.fromJson(json, CarMes.class); //String转化成JavaBean
+
+
+
+    }
 }

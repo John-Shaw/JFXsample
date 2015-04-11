@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -31,6 +33,11 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Button>
+                  <ComboBox fx:id="selectBox" onAction="#selectItem" opacity="0.94" prefHeight="26.0" prefWidth="124.0" promptText="选择零件" visibleRowCount="16">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </ComboBox>
                </children>
                <FlowPane.margin>
                   <Insets left="10.0" top="10.0" />
@@ -41,6 +48,7 @@
                 <AnchorPane fx:id="vedioPanel">
                      <children>
                         <MediaView fx:id="mediaView" fitHeight="400.0" fitWidth="300.0" layoutX="172.0" layoutY="139.0" AnchorPane.bottomAnchor="139.0" AnchorPane.leftAnchor="172.0" AnchorPane.rightAnchor="172.0" AnchorPane.topAnchor="139.0" />
+                        <ImageView fitHeight="678.0" fitWidth="644.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" />
                      </children></AnchorPane>
                 <AnchorPane fx:id="wordPanel" minHeight="0.0" minWidth="0.0" prefHeight="197.0" prefWidth="416.0">
                      <children>
