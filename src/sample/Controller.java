@@ -1,7 +1,7 @@
 package sample;
 
 
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -62,8 +62,6 @@ public class Controller implements Initializable{
         HWPFDocument doc2003;
         WordExtractor word2003;
 
-
-
         if (this.idTextField.getText().isEmpty()){
             Alert mesBox = new Alert(Alert.AlertType.ERROR);
             mesBox.setTitle("ERROR!");
@@ -73,7 +71,8 @@ public class Controller implements Initializable{
             //todo
 
             System.out.println("file://" + localPath + "/temp/videoviewdemo.mp4");
-            Media media = new Media("file://"+ localPath +"/temp/videoviewdemo.mp4");
+            File mediaFile = new File(localPath +"/temp/videoviewdemo.mp4");
+            Media media = new Media(mediaFile.toURI().toString());
 
             final MediaPlayer player = new MediaPlayer(media);
             mediaView.setMediaPlayer(player);
@@ -214,9 +213,9 @@ public class Controller implements Initializable{
         }
         String json=sb.toString();
 
-        Gson gson = new Gson();
-
-        carMes=gson.fromJson(json, CarMes.class); //String转化成JavaBean
+//        Gson gson = new Gson();
+//
+//        carMes=gson.fromJson(json, CarMes.class); //String转化成JavaBean
 
 
 
