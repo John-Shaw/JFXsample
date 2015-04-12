@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -43,17 +42,18 @@
                   <Insets left="10.0" top="10.0" />
                </FlowPane.margin>
             </HBox>
-            <SplitPane dividerPositions="0.65" prefHeight="680.0" prefWidth="999.0">
+            <SplitPane dividerPositions="0.5" prefHeight="680.0" prefWidth="999.0">
               <items>
-                <AnchorPane fx:id="vedioPanel">
+                <AnchorPane fx:id="vedioPanel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="0.0">
                      <children>
-                        <MediaView fx:id="mediaView" fitHeight="400.0" fitWidth="300.0" layoutX="172.0" layoutY="139.0" AnchorPane.bottomAnchor="139.0" AnchorPane.leftAnchor="172.0" AnchorPane.rightAnchor="172.0" AnchorPane.topAnchor="139.0" />
-                        <ImageView fitHeight="678.0" fitWidth="644.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" />
+                        <MediaView fx:id="mediaView" fitHeight="400.0" fitWidth="300.0" layoutY="139.0" AnchorPane.bottomAnchor="139.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="195.0" AnchorPane.topAnchor="139.0" />
                      </children></AnchorPane>
-                <AnchorPane fx:id="wordPanel" minHeight="0.0" minWidth="0.0" prefHeight="197.0" prefWidth="416.0">
+                <AnchorPane fx:id="wordPanel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="357.0">
                      <children>
                         <TextArea fx:id="wordViewer" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children></AnchorPane>
+                        <ImageView fitHeight="678.0" fitWidth="495.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </AnchorPane>
               </items>
                <FlowPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" />
