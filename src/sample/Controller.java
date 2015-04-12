@@ -17,7 +17,6 @@ import javafx.scene.media.MediaView;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.extractor.WordExtractor;
 
-import javax.swing.*;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -170,6 +169,7 @@ public class Controller implements Initializable{
 
             selectBox.setItems(options);
 
+
         }
 
         public String pathFix(String path){
@@ -178,12 +178,13 @@ public class Controller implements Initializable{
 
         public void testDBConnect(ActionEvent actionEvent) {
 
-//            db =new DBConnector();
+            db =new DBConnector();
+            db.testDB();
 //            db.testDownloadFiel("32");
-            String path = localPath + "/temp/samples.json";
-            readDataFromJson(path);
-
-            System.out.println(carMes.getType()[10].getOption()[0].getLabel());
+//            String path = localPath + "/temp/samples.json";
+//            readDataFromJson(path);
+//
+//            System.out.println(carMes.getType()[10].getOption()[0].getLabel());
 
         }
 

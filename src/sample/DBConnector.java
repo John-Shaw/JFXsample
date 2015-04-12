@@ -16,10 +16,10 @@ import java.sql.*;
  * Created by John Show on 2015/4/5.
  */
 public class DBConnector {
-    private String url="jdbc:mysql://210.28.164.6:3306/car";
-    private String user = "root";
-    private String password = "";
-
+    final private String url="jdbc:mysql://210.28.164.8:3306/car";
+    final private String user = "root";
+    final private String password = "";
+    final private String filePath = "http://210.28.164.8:8080/WebApplication1/files/";
 
     private String docFileName;
 
@@ -36,15 +36,16 @@ public class DBConnector {
 
 
         try {
-            con = DriverManager.getConnection(url, user, password);
+            con = DriverManager.getConnection("jdbc:mysql://192.168.0.223:3306/book_db", "john", "");
 
             st = con.createStatement();
             System.out.println("连接数据库");
 
-            rs = st.executeQuery("SELECT VERSION()");
+            rs = st.executeQuery("SELECT * from book_db.t_book");
 
-            if (rs.next()) {
-                System.out.println("数据库版本"+rs.getString(1));
+            while (rs.next()) {
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(2));
             }
 
         } catch (SQLException ex) {
@@ -108,7 +109,7 @@ public class DBConnector {
             }
         }
 
-        String url = "http://210.28.164.6:8080/WebApplication1/files/"+docFileName;
+        String url = filePath+docFileName;
         String saveFIle = "temp/"+docFileName;
         if(httpDownload(url,saveFIle))
             System.out.println("download file sucessfully");
