@@ -18,14 +18,11 @@
         <element id="module-output" name="JFXsample" />
       </element>
       <element id="directory" name="lib">
-        <element id="file-copy" path="C:/Program Files/Java/Extension/poi-3.11/poi-3.11-20141221.jar" />
-        <element id="file-copy" path="C:/Program Files/Java/Extension/poi-3.11/poi-excelant-3.11-20141221.jar" />
-        <element id="file-copy" path="C:/Program Files/Java/Extension/poi-3.11/poi-ooxml-3.11-20141221.jar" />
-        <element id="file-copy" path="C:/Program Files/Java/Extension/poi-3.11/poi-ooxml-schemas-3.11-20141221.jar" />
-        <element id="file-copy" path="C:/Program Files/Java/Extension/poi-3.11/poi-scratchpad-3.11-20141221.jar" />
-        <element id="file-copy" path="C:/Program Files (x86)/MySQL/Connector.J 5.1/mysql-connector-java-5.1.34-bin.jar" />
+        <element id="library" level="project" name="lib" />
       </element>
-      <element id="directory" name="temp" />
+      <element id="directory" name="temp">
+        <element id="dir-copy" path="$PROJECT_DIR$/temp" />
+      </element>
     </root>
   </artifact>
 </component>

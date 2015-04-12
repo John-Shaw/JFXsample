@@ -2,10 +2,7 @@ package sample;
 
 import javafx.event.ActionEvent;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -122,6 +119,11 @@ public class DBConnector {
 
     public static boolean httpDownload(String httpUrl,String saveFile){
 
+        File downloadFile = new File(saveFile);
+        if (downloadFile.exists()){
+            return true;
+        }
+
         int bytesum = 0;
         int byteread = 0;
 
@@ -137,6 +139,7 @@ public class DBConnector {
         try {
             URLConnection conn = url.openConnection();
             InputStream inStream = conn.getInputStream();
+
             FileOutputStream fs = new FileOutputStream(saveFile);
 
             byte[] buffer = new byte[1204];

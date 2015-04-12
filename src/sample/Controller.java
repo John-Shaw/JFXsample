@@ -179,7 +179,8 @@ public class Controller implements Initializable{
         public void testDBConnect(ActionEvent actionEvent) {
 
             db =new DBConnector();
-            db.testDB();
+//            db.testDB();
+            System.out.println(db.httpDownload("","temp/lizhu.doc"));
 //            db.testDownloadFiel("32");
 //            String path = localPath + "/temp/samples.json";
 //            readDataFromJson(path);
