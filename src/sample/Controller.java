@@ -5,15 +5,20 @@ package sample;
 import com.google.gson.Gson;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.event.*;
+import javafx.event.Event;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -33,30 +38,54 @@ public class Controller implements Initializable{
     public AnchorPane wordPanel;
     public TextArea wordViewer;
     public MediaView mediaView;
-    public ComboBox selectBox;
+//    public ComboBox selectBox;
     public ImageView imageView;
+    public Button searchBtn;
+    public HBox choosenBtnHbox;
+    public Label workNumberLabel;
     private String localPath;
     private DBConnector db;
 
-    private ObservableList<String> options =
-            FXCollections.observableArrayList(
-                    "蓄电池",
-                    "废液",
-                    "车门",
-                    "舱盖",
-                    "车轮",
-                    "挡风玻璃",
-                    "车顶",
-                    "立柱",
-                    "方向盘",
-                    "座椅",
-                    "仪表盘",
-                    "发动机",
-                    "变速器",
-                    "悬挂",
-                    "传动轴",
-                    "油箱"
-            );
+//    private ObservableList<String> options =
+//            FXCollections.observableArrayList(
+//                    "蓄电池",
+//                    "废液",
+//                    "车门",
+//                    "舱盖",
+//                    "车轮",
+//                    "挡风玻璃",
+//                    "车顶",
+//                    "立柱",
+//                    "方向盘",
+//                    "座椅",
+//                    "仪表盘",
+//                    "发动机",
+//                    "变速器",
+//                    "悬挂",
+//                    "传动轴",
+//                    "油箱"
+//            );
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        localPath = System.getProperty("user.dir").replaceAll("\\\\", "/");
+//        System.out.println(localPath);
+        idTextField.requestFocus();
+
+//        selectBox.setItems(options);
+
+        Gson gson = new Gson();
+        String path = localPath + "/temp/Configure.json";
+        conf=gson.fromJson(readDataFromJson(path), Configure.class);
+
+        workNumberLabel.setText("工位号："+conf.getId());
+        for (Part part:conf.getParts()){
+            Button btn = new Button(part.getName_cn());
+            btn.setMinWidth(100);
+            choosenBtnHbox.getChildren().addAll(btn);
+        }
+
+    }
 
 
     private void setDisplayView(String partName){
@@ -127,7 +156,7 @@ public class Controller implements Initializable{
             Alert mesBox = new Alert(Alert.AlertType.ERROR);
             mesBox.setTitle("ERROR!");
             mesBox.setHeaderText("发生了一个错误。");
-            mesBox.setContentText("请输入ID号");
+            mesBox.setContentText("未找到任何文件，请尝试更新数据库。");
             mesBox.showAndWait();
         }
 
@@ -218,16 +247,7 @@ public class Controller implements Initializable{
         }
     }
 
-        @Override
-        public void initialize(URL location, ResourceBundle resources) {
-            localPath = System.getProperty("user.dir").replaceAll("\\\\", "/");
-            System.out.println(localPath);
-            idTextField.requestFocus();
 
-            selectBox.setItems(options);
-
-
-        }
 
         public String pathFix(String path){
             return path.replaceAll("\\\\", "/");
@@ -252,12 +272,13 @@ public class Controller implements Initializable{
         }
 
     private CarMes carMes;
-
-    public void selectItem(ActionEvent actionEvent) {
-    }
+//
+//    public void selectItem(ActionEvent actionEvent) {
+//
+//    }
 
     private Configure conf;
-    public void readDataFromJson(String path){
+    public String readDataFromJson(String path){
         //读取json文件，保存到String json中
         String fileName=path;
         File file=new File(fileName);
@@ -278,11 +299,28 @@ public class Controller implements Initializable{
         }
         String json=sb.toString();
 
-        Gson gson = new Gson();
-
-        conf=gson.fromJson(json, Configure.class); //String转化成JavaBean
+        return json;
 
 
 
+
+
+    }
+    public void onEnter(ActionEvent actionEvent) {
+        if (this.idTextField.getText().isEmpty()) {
+            Alert mesBox = new Alert(Alert.AlertType.ERROR);
+            mesBox.setTitle("ERROR!");
+            mesBox.setHeaderText("发生了一个错误。");
+            mesBox.setContentText("未找到任何文件，请尝试更新数据库。");
+            mesBox.showAndWait();
+        } else {
+            searchBtn.requestFocus();
+        }
+    }
+
+    public void onSearchEnter(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+            searchBtn.fire();
+        }
     }
 }

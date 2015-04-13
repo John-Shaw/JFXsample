@@ -19,6 +19,12 @@ public class Configure {
 class Part{
     private String part;
 
+    public String getName_cn() {
+        return name_cn;
+    }
+
+    private String name_cn;
+
     public String getPart() {
         return part;
     }

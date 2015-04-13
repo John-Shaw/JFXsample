@@ -20,30 +20,30 @@
     <children>
         <FlowPane columnHalignment="CENTER" prefHeight="768.0" prefWidth="1024.0">
             <children>
-                <HBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="885.0">
+                <HBox fx:id="choosenBtnHbox" alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="885.0" spacing="10">
                     <children>
                         <Label contentDisplay="CENTER" prefHeight="32.0" prefWidth="50.0" text="    ID" textAlignment="CENTER" />
-                        <TextField fx:id="idTextField" prefHeight="30.0" prefWidth="105.0" />
-                        <Button mnemonicParsing="false" onAction="#searchClick" prefHeight="30.0" prefWidth="108.0" text="Search">
+                        <TextField fx:id="idTextField" prefHeight="30.0" prefWidth="105.0" onAction="#onEnter"/>
+                        <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#searchClick" onKeyPressed="#onSearchEnter" prefHeight="30.0" prefWidth="100.0" text="Search">
                             <HBox.margin>
                                 <Insets left="10.0" />
                             </HBox.margin></Button>
-                        <Button mnemonicParsing="false" onAction="#testDBConnect" prefHeight="30.0" prefWidth="108.0" text="test DB">
+                        <Button mnemonicParsing="false" onAction="#testDBConnect" prefHeight="30.0" prefWidth="100.0" text="test DB">
                             <HBox.margin>
                                 <Insets left="10.0" />
                             </HBox.margin>
                         </Button>
-                        <ComboBox fx:id="selectBox" onAction="#selectItem" opacity="0.94" prefHeight="26.0" prefWidth="124.0" promptText="选择零件" visibleRowCount="16">
-                            <HBox.margin>
-                                <Insets left="10.0" />
-                            </HBox.margin>
-                        </ComboBox>
+                        <!--<ComboBox fx:id="selectBox" onAction="#selectItem" opacity="0.94" prefHeight="26.0" prefWidth="124.0" promptText="选择零件" visibleRowCount="16">-->
+                            <!--<HBox.margin>-->
+                                <!--<Insets left="10.0" />-->
+                            <!--</HBox.margin>-->
+                        <!--</ComboBox>-->
                     </children>
                     <FlowPane.margin>
                         <Insets left="10.0" top="10.0" />
                     </FlowPane.margin>
                 </HBox>
-                <Label alignment="CENTER" prefHeight="44.0" prefWidth="96.0" text="工位号：1" />
+                <Label fx:id="workNumberLabel" alignment="CENTER" prefHeight="44.0" prefWidth="96.0" text="工位号：1" />
                 <SplitPane dividerPositions="0.6" prefHeight="601.0" prefWidth="999.0">
                     <items>
                         <AnchorPane fx:id="vedioPanel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="0.0">
