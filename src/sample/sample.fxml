@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.media.*?>
-
 <?import javafx.scene.text.Font?>
+
 <GridPane alignment="center" hgap="10" maxHeight="768.0" maxWidth="1024.0" minHeight="600.0" minWidth="800.0" prefHeight="768.0" prefWidth="1024.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <columnConstraints>
         <ColumnConstraints />
@@ -23,14 +24,14 @@
                 <HBox fx:id="choosenBtnHbox" alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="885.0" spacing="10">
                     <children>
                         <Label contentDisplay="CENTER" prefHeight="32.0" prefWidth="50.0" text="    ID" textAlignment="CENTER" />
-                        <TextField fx:id="idTextField" prefHeight="30.0" prefWidth="105.0" onAction="#onEnter"/>
+                        <TextField fx:id="idTextField" onAction="#onEnter" prefHeight="30.0" prefWidth="105.0" />
                         <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#searchClick" onKeyPressed="#onSearchEnter" prefHeight="30.0" prefWidth="100.0" text="Search">
                             <HBox.margin>
-                                <Insets left="10.0" />
+                                <Insets />
                             </HBox.margin></Button>
                         <Button mnemonicParsing="false" onAction="#testDBConnect" prefHeight="30.0" prefWidth="100.0" text="test DB">
                             <HBox.margin>
-                                <Insets left="10.0" />
+                                <Insets />
                             </HBox.margin>
                         </Button>
                         <!--<ComboBox fx:id="selectBox" onAction="#selectItem" opacity="0.94" prefHeight="26.0" prefWidth="124.0" promptText="选择零件" visibleRowCount="16">-->

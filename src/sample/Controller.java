@@ -44,7 +44,9 @@ public class Controller implements Initializable{
     public HBox choosenBtnHbox;
     public Label workNumberLabel;
     private String localPath;
-    private DBConnector db;
+//    private DBConnector db;
+//    private CarMes carMes;
+    private Configure conf;
 
 //    private ObservableList<String> options =
 //            FXCollections.observableArrayList(
@@ -69,7 +71,6 @@ public class Controller implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         localPath = System.getProperty("user.dir").replaceAll("\\\\", "/");
-//        System.out.println(localPath);
         idTextField.requestFocus();
 
 //        selectBox.setItems(options);
@@ -132,9 +133,9 @@ public class Controller implements Initializable{
 
     }
 
-    private void setTextView(String xudianchi) throws IOException {
+    private void setTextView(String partName) throws IOException {
 
-        File docFile = new File(localPath+"/temp/xudianchi.doc");
+        File docFile = new File(localPath+"/temp/"+ partName +".doc");
         if (docFile.exists()){
             FileInputStream fis2003 = new FileInputStream(docFile);
             HWPFDocument doc2003 = new HWPFDocument(fis2003);
@@ -245,6 +246,8 @@ public class Controller implements Initializable{
 //            }
 //
         }
+
+        choosenBtnHbox.getChildren().get(4).requestFocus();
     }
 
 
@@ -255,7 +258,7 @@ public class Controller implements Initializable{
 
         public void testDBConnect(ActionEvent actionEvent) {
 
-            db =new DBConnector();
+//            db =new DBConnector();
 //            db.testDB();
 //            System.out.println(db.httpDownload("","temp/lizhu.doc"));
 //            db.testDownloadFiel("32");
@@ -271,13 +274,13 @@ public class Controller implements Initializable{
 
         }
 
-    private CarMes carMes;
+
 //
 //    public void selectItem(ActionEvent actionEvent) {
 //
 //    }
 
-    private Configure conf;
+
     public String readDataFromJson(String path){
         //读取json文件，保存到String json中
         String fileName=path;
@@ -301,10 +304,6 @@ public class Controller implements Initializable{
 
         return json;
 
-
-
-
-
     }
     public void onEnter(ActionEvent actionEvent) {
         if (this.idTextField.getText().isEmpty()) {
@@ -321,6 +320,7 @@ public class Controller implements Initializable{
     public void onSearchEnter(KeyEvent keyEvent) {
         if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             searchBtn.fire();
+            choosenBtnHbox.getChildren().get(4).requestFocus();
         }
     }
 }
