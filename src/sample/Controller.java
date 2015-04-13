@@ -2,6 +2,7 @@ package sample;
 
 
 //import com.google.gson.Gson;
+import com.google.gson.Gson;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -17,6 +20,7 @@ import javafx.scene.media.MediaView;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.extractor.WordExtractor;
 
+import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,6 +34,7 @@ public class Controller implements Initializable{
     public TextArea wordViewer;
     public MediaView mediaView;
     public ComboBox selectBox;
+    public ImageView imageView;
     private String localPath;
     private DBConnector db;
 
@@ -54,26 +59,10 @@ public class Controller implements Initializable{
             );
 
 
-
-
-    public void searchClick(ActionEvent actionEvent) throws IOException, Exception {
-
-        FileInputStream fis2003;
-        HWPFDocument doc2003;
-        WordExtractor word2003;
-
-        if (this.idTextField.getText().isEmpty()){
-            Alert mesBox = new Alert(Alert.AlertType.ERROR);
-            mesBox.setTitle("ERROR!");
-            mesBox.setContentText("please input ID number");
-            mesBox.showAndWait();
-        } else {
-            //todo
-
-            System.out.println("file://" + localPath + "/temp/videoviewdemo.mp4");
-            File mediaFile = new File(localPath +"/temp/videoviewdemo.mp4");
+    private void setDisplayView(String partName){
+        File mediaFile = new File(localPath +"/temp/"+partName+".mp4");
+        if (mediaFile.exists()){
             Media media = new Media(mediaFile.toURI().toString());
-
             final MediaPlayer player = new MediaPlayer(media);
             mediaView.setMediaPlayer(player);
             player.play();
@@ -83,42 +72,111 @@ public class Controller implements Initializable{
                     int w = player.getMedia().getWidth();
                     int h = player.getMedia().getHeight();
 
-                    if(w>vedioPanel.getWidth())
-                        w = (int)vedioPanel.getWidth();
-                    if (h>vedioPanel.getHeight())
-                        h = (int)vedioPanel.getHeight();
+                    if (w > vedioPanel.getWidth())
+                        w = (int) vedioPanel.getWidth();
+                    if (h > vedioPanel.getHeight())
+                        h = (int) vedioPanel.getHeight();
 
                     mediaView.setFitWidth(w);
                     mediaView.setFitHeight(h);
 
                 }
             });
+            return;
+        }
 
-            try {
+        File imageFile = new File(localPath +"/temp/"+partName+".jpg");
+        if (imageFile.exists()){
+            Image img = new Image(imageFile.toURI().toString());
+            double aspect = img.getWidth()/img.getHeight();
+            imageView.setImage(img);
+            imageView.fitWidthProperty().bind(vedioPanel.widthProperty());
+            imageView.setFitHeight(vedioPanel.getWidth()/aspect);
+            return;
+        }
 
-                //todo bug问题
-                //由于poi库太老，现在的问题是读取word中表格会出错，然后我使用另一种读取段落的方法，读取后的表格数据不换行
-                //手动加了“\n”后，正常文本每段会多一个换行
-                //已解决
+        Alert mesBox = new Alert(Alert.AlertType.ERROR);
+        mesBox.setTitle("ERROR!");
+        mesBox.setHeaderText("发生了一个错误。");
+        mesBox.setContentText("未找到任何文件，请尝试更新数据库。");
+        mesBox.showAndWait();
 
+    }
 
-                fis2003=new FileInputStream(new File(localPath+"/temp/lizhu.doc"));
-                doc2003 = new HWPFDocument(fis2003);
-                word2003 = new WordExtractor(doc2003);
+    private void setTextView(String xudianchi) throws IOException {
 
-//                String text2003 = word2003.getText();
-                String text = "";
-                String[] fileData = word2003.getParagraphText();
-                for (int i=0; i<fileData.length; i++){
-                    if (fileData[i] != null){
-                        if(fileData[i].endsWith("\n")){
-                            text += fileData[i];
-                        }
-                        else{
-                        text += fileData[i] + "\n";}
+        File docFile = new File(localPath+"/temp/xudianchi.doc");
+        if (docFile.exists()){
+            FileInputStream fis2003 = new FileInputStream(docFile);
+            HWPFDocument doc2003 = new HWPFDocument(fis2003);
+            WordExtractor word2003 = new WordExtractor(doc2003);
+
+            String text = "";
+            String[] fileData = word2003.getParagraphText();
+            for (int i=0; i<fileData.length; i++){
+                if (fileData[i] != null){
+                    if(fileData[i].endsWith("\n")){
+                        text += fileData[i];
                     }
+                    else{
+                        text += fileData[i] + "\n";}
                 }
-                wordViewer.setText(text);
+            }
+            wordViewer.setText(text);
+        } else {
+            Alert mesBox = new Alert(Alert.AlertType.ERROR);
+            mesBox.setTitle("ERROR!");
+            mesBox.setHeaderText("发生了一个错误。");
+            mesBox.setContentText("请输入ID号");
+            mesBox.showAndWait();
+        }
+
+    }
+
+    public void searchClick(ActionEvent actionEvent) throws IOException {
+
+//        FileInputStream fis2003;
+//        HWPFDocument doc2003;
+//        WordExtractor word2003;
+
+        if (this.idTextField.getText().isEmpty()){
+            Alert mesBox = new Alert(Alert.AlertType.ERROR);
+            mesBox.setTitle("ERROR!");
+            mesBox.setHeaderText("发生了一个错误。");
+            mesBox.setContentText("未找到任何文件，请尝试更新数据库。");
+            mesBox.showAndWait();
+        } else {
+
+            setDisplayView("xudianchi");
+
+            setTextView("xudianchi");
+
+            //todo bug问题
+            //由于poi库太老，现在的问题是读取word中表格会出错，然后我使用另一种读取段落的方法，读取后的表格数据不换行
+            //手动加了“\n”后，正常文本每段会多一个换行
+            //已解决
+//            try {
+//
+
+//
+//
+//                fis2003=new FileInputStream(new File(localPath+"/temp/xudianchi.doc"));
+//                doc2003 = new HWPFDocument(fis2003);
+//                word2003 = new WordExtractor(doc2003);
+//
+////                String text2003 = word2003.getText();
+//                String text = "";
+//                String[] fileData = word2003.getParagraphText();
+//                for (int i=0; i<fileData.length; i++){
+//                    if (fileData[i] != null){
+//                        if(fileData[i].endsWith("\n")){
+//                            text += fileData[i];
+//                        }
+//                        else{
+//                        text += fileData[i] + "\n";}
+//                    }
+//                }
+//                wordViewer.setText(text);
 
 //                    String[] s=new String[20];
 //                    FileInputStream in=new FileInputStream(new File(localPath+"/temp/test.doc"));
@@ -152,11 +210,11 @@ public class Controller implements Initializable{
 //                       s1= s1+s[i]+"\n";
 //                    }
 //                    wordViewer.setText(s1);
-
-            } catch (Exception e) {
-               e.printStackTrace();
-            }
-
+//
+//            } catch (Exception e) {
+//               e.printStackTrace();
+//            }
+//
         }
     }
 
@@ -179,12 +237,17 @@ public class Controller implements Initializable{
 
             db =new DBConnector();
 //            db.testDB();
-            System.out.println(db.httpDownload("","temp/lizhu.doc"));
+//            System.out.println(db.httpDownload("","temp/lizhu.doc"));
 //            db.testDownloadFiel("32");
 //            String path = localPath + "/temp/samples.json";
 //            readDataFromJson(path);
 //
 //            System.out.println(carMes.getType()[10].getOption()[0].getLabel());
+
+//            String path = localPath + "/temp/Configure.json";
+//            readDataFromJson(path);
+//            System.out.println(conf.getParts().length);
+
 
         }
 
@@ -193,6 +256,7 @@ public class Controller implements Initializable{
     public void selectItem(ActionEvent actionEvent) {
     }
 
+    private Configure conf;
     public void readDataFromJson(String path){
         //读取json文件，保存到String json中
         String fileName=path;
@@ -214,9 +278,9 @@ public class Controller implements Initializable{
         }
         String json=sb.toString();
 
-//        Gson gson = new Gson();
-//
-//        carMes=gson.fromJson(json, CarMes.class); //String转化成JavaBean
+        Gson gson = new Gson();
+
+        conf=gson.fromJson(json, Configure.class); //String转化成JavaBean
 
 
 
