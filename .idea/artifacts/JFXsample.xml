@@ -23,6 +23,9 @@
       <element id="directory" name="temp">
         <element id="dir-copy" path="$PROJECT_DIR$/temp" />
       </element>
+      <element id="directory" name="configuration">
+        <element id="dir-copy" path="$PROJECT_DIR$/configuration" />
+      </element>
     </root>
   </artifact>
 </component>

@@ -1,12 +1,7 @@
 package sample;
 
-
-//import com.google.gson.Gson;
 import com.google.gson.Gson;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.*;
-import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -25,7 +20,6 @@ import javafx.scene.media.MediaView;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.extractor.WordExtractor;
 
-import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,35 +32,17 @@ public class Controller implements Initializable{
     public AnchorPane wordPanel;
     public TextArea wordViewer;
     public MediaView mediaView;
-//    public ComboBox selectBox;
+
     public ImageView imageView;
     public Button searchBtn;
     public HBox choosenBtnHbox;
     public Label workNumberLabel;
     private String localPath;
-//    private DBConnector db;
-//    private CarMes carMes;
-    private Configure conf;
 
-//    private ObservableList<String> options =
-//            FXCollections.observableArrayList(
-//                    "蓄电池",
-//                    "废液",
-//                    "车门",
-//                    "舱盖",
-//                    "车轮",
-//                    "挡风玻璃",
-//                    "车顶",
-//                    "立柱",
-//                    "方向盘",
-//                    "座椅",
-//                    "仪表盘",
-//                    "发动机",
-//                    "变速器",
-//                    "悬挂",
-//                    "传动轴",
-//                    "油箱"
-//            );
+    private Configure conf;
+    private CarParts parts;
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -76,22 +52,60 @@ public class Controller implements Initializable{
 //        selectBox.setItems(options);
 
         Gson gson = new Gson();
-        String path = localPath + "/configuration/Configure.json";
-        conf=gson.fromJson(readDataFromJson(path), Configure.class);
+        String configPath = localPath + "/configuration/Configure.json";
+        conf = gson.fromJson(readDataFromJson(configPath), Configure.class);
+        String partsPath = localPath + "/configuration/CarParts.json";
+        parts = gson.fromJson(readDataFromJson(partsPath), CarParts.class);
 
-        workNumberLabel.setText("工位号："+conf.getId());
+
+        workNumberLabel.setText("工位号：" + conf.getWork_number());
+
         for (Part part:conf.getParts()){
             Button btn = new Button(part.getName_cn());
+            btn.setId(part.getId());
             btn.setMinWidth(100);
-            choosenBtnHbox.getChildren().addAll(btn);
+
+            CarPart[] carParts = parts.getCarParts();
+            for (CarPart carPart:carParts){
+
+                if (part.getId().equals(carPart.getId())){
+
+
+                    btn.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+//                            setDisplayView(carPart.getMediaName());
+                            setDisplayView(carPart.getImageName());
+                            try {
+                                setTextView(carPart.getDocName());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    btn.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                        @Override
+                        public void handle(KeyEvent event) {
+                            if (event.getCode().equals(KeyCode.ENTER)) {
+                                btn.fire();
+                            }
+                        }
+                    });
+                    choosenBtnHbox.getChildren().addAll(btn);
+
+                    break;
+                }
+            }
         }
+
 
     }
 
 
+
     private void setDisplayView(String partName){
-        File mediaFile = new File(localPath +"/temp/"+partName+".mp4");
-        if (mediaFile.exists()){
+        File mediaFile = new File(localPath +"/temp/"+partName);
+        if (mediaFile.exists() && partName.endsWith(".mp4")){
             Media media = new Media(mediaFile.toURI().toString());
             final MediaPlayer player = new MediaPlayer(media);
             mediaView.setMediaPlayer(player);
@@ -115,9 +129,9 @@ public class Controller implements Initializable{
             return;
         }
 
-        File imageFile = new File(localPath +"/temp/"+partName+".jpg");
-        if (imageFile.exists()){
-            Image img = new Image(imageFile.toURI().toString());
+
+        if (mediaFile.exists()){
+            Image img = new Image(mediaFile.toURI().toString());
             double aspect = img.getWidth()/img.getHeight();
             imageView.setImage(img);
             imageView.fitWidthProperty().bind(vedioPanel.widthProperty());
@@ -135,7 +149,7 @@ public class Controller implements Initializable{
 
     private void setTextView(String partName) throws IOException {
 
-        File docFile = new File(localPath+"/temp/"+ partName +".doc");
+        File docFile = new File(localPath+"/temp/"+ partName);
         if (docFile.exists()){
             FileInputStream fis2003 = new FileInputStream(docFile);
             HWPFDocument doc2003 = new HWPFDocument(fis2003);
@@ -165,99 +179,26 @@ public class Controller implements Initializable{
 
     public void searchClick(ActionEvent actionEvent) throws IOException {
 
-//        FileInputStream fis2003;
-//        HWPFDocument doc2003;
-//        WordExtractor word2003;
-
         if (this.idTextField.getText().isEmpty()){
             Alert mesBox = new Alert(Alert.AlertType.ERROR);
             mesBox.setTitle("ERROR!");
             mesBox.setHeaderText("发生了一个错误。");
-            mesBox.setContentText("未找到任何文件，请尝试更新数据库。");
+            mesBox.setContentText("请输入ID。");
             mesBox.showAndWait();
         } else {
-
-            setDisplayView("xudianchi");
-
-            setTextView("xudianchi");
-
-            //todo bug问题
-            //由于poi库太老，现在的问题是读取word中表格会出错，然后我使用另一种读取段落的方法，读取后的表格数据不换行
-            //手动加了“\n”后，正常文本每段会多一个换行
-            //已解决
-//            try {
-//
-
-//
-//
-//                fis2003=new FileInputStream(new File(localPath+"/temp/xudianchi.doc"));
-//                doc2003 = new HWPFDocument(fis2003);
-//                word2003 = new WordExtractor(doc2003);
-//
-////                String text2003 = word2003.getText();
-//                String text = "";
-//                String[] fileData = word2003.getParagraphText();
-//                for (int i=0; i<fileData.length; i++){
-//                    if (fileData[i] != null){
-//                        if(fileData[i].endsWith("\n")){
-//                            text += fileData[i];
-//                        }
-//                        else{
-//                        text += fileData[i] + "\n";}
-//                    }
-//                }
-//                wordViewer.setText(text);
-
-//                    String[] s=new String[20];
-//                    FileInputStream in=new FileInputStream(new File(localPath+"/temp/test.doc"));
-//                    POIFSFileSystem pfs=new POIFSFileSystem(in);
-//                    HWPFDocument hwpf=new HWPFDocument(pfs);
-//                    Range range =hwpf.getRange();
-//
-//                    TableIterator it=new TableIterator(range);
-//
-//                    int index=0;
-//                    while(it.hasNext()){
-//                        Table tb=(Table)it.next();
-//                        for(int i=0;i<tb.numRows();i++){
-//                            //System.out.println("Numrows :"+tb.numRows());
-//                            TableRow tr=tb.getRow(i);
-//                            for(int j=0;j<tr.numCells();j++){
-//                                //System.out.println("numCells :"+tr.numCells());
-////                      System.out.println("j   :"+j);
-//                                TableCell td=tr.getCell(j);
-//                                for(int k=0;k<td.numParagraphs();k++){
-//                                    //System.out.println("numParagraphs :"+td.numParagraphs());
-//                                    Paragraph para=td.getParagraph(k);
-//                                    s[index]=para.text().trim();
-//                                    index++;
-//                                }
-//                            }
-//                        }
-//                    }
-//                    String s1="";
-//                    for(int i=0;i<s.length;i++){
-//                       s1= s1+s[i]+"\n";
-//                    }
-//                    wordViewer.setText(s1);
-//
-//            } catch (Exception e) {
-//               e.printStackTrace();
-//            }
-//
+            Button btn = (Button)choosenBtnHbox.getChildren().get(4);
+            btn.fire();
+            btn.requestFocus();
         }
 
-        choosenBtnHbox.getChildren().get(4).requestFocus();
     }
-
-
 
         public String pathFix(String path){
             return path.replaceAll("\\\\", "/");
         }
 
         public void testDBConnect(ActionEvent actionEvent) {
-
+//            System.out.println(parts.getCarParts()[1].getImageName());
 //            db =new DBConnector();
 //            db.testDB();
 //            System.out.println(db.httpDownload("","temp/lizhu.doc"));
@@ -270,15 +211,14 @@ public class Controller implements Initializable{
 //            String path = localPath + "/temp/Configure.json";
 //            readDataFromJson(path);
 //            System.out.println(conf.getParts().length);
-
+            Alert mesBox = new Alert(Alert.AlertType.INFORMATION);
+            mesBox.setTitle("更新!");
+            mesBox.setHeaderText(null);
+            mesBox.setContentText("您的数据已为最新");
+            mesBox.showAndWait();
 
         }
 
-
-//
-//    public void selectItem(ActionEvent actionEvent) {
-//
-//    }
 
 
     public String readDataFromJson(String path){
@@ -321,6 +261,12 @@ public class Controller implements Initializable{
         if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             searchBtn.fire();
             choosenBtnHbox.getChildren().get(4).requestFocus();
+        }
+    }
+
+    public void onRightPress(KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.RIGHT)) {
+            searchBtn.requestFocus();
         }
     }
 }

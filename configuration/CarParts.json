@@ -1,130 +1,132 @@
-[
-  {
-    "part": "CBettrey",
-    "name_cn": "蓄电池",
-    "imageName": "xudianchi.jpg",
-    "mediaName": "xudianchi.mp4",
-    "docName": "xudianchi.doc",
-    "id": "001"
-  },
-  {
-    "part": "COil",
-    "name_cn": "废液",
-    "imageName": "feiyoufeiye.jpg",
-    "mediaName": "feiyoufeiye.mp4",
-    "docName": "feiyoufeiye.doc",
-    "id": "002"
-  },
-  {
-    "part": "CDoor",
-    "name_cn": "车门",
-    "imageName": "chemen.jpg",
-    "mediaName": "chhemen.mp4",
-    "docName": "chemen.doc",
-    "id": "003"
-  },
-  {
-    "part": "CFontCover",
-    "name_cn": "舱盖",
-    "imageName": "canggai.jpg",
-    "mediaName": "canggai.mp4",
-    "docName": "canggai.doc",
-    "id": "004"
-  },
-  {
-    "part": "CCircle",
-    "name_cn": "车轮",
-    "imageName": "chelun.jpg",
-    "mediaName": "chelun.mp4",
-    "docName": "chelun.doc",
-    "id": "005"
-  },
-  {
-    "part": "CGlass",
-    "name_cn": "挡风玻璃",
-    "imageName": "dangfengboli.jpg",
-    "mediaName": "dangfengboli.mp4",
-    "docName": "dangfengboli.doc",
-    "id": "006"
-  },
-  {
-    "part": "CCarTop",
-    "name_cn": "车顶",
-    "imageName": "cheding.jpg",
-    "mediaName": "cheding.mp4",
-    "docName": "cheding.doc",
-    "id": "007"
-  },
-  {
-    "part": "CColumn",
-    "name_cn": "立柱",
-    "imageName": "lizhu.png",
-    "mediaName": "lizhu.mp4",
-    "docName": "lizhu.doc",
-    "id": "008"
-  },
-  {
-    "part": "CDirection",
-    "name_cn": "方向盘",
-    "imageName": "fangxiangpan.jpg",
-    "mediaName": "fangxiangpan.mp4",
-    "docName": "fangxiangpan.doc",
-    "id": "009"
-  },
-  {
-    "part": "CSeat",
-    "name_cn": "座椅",
-    "imageName": "zuoyi.jpg",
-    "mediaName": "zuoyi.mp4",
-    "docName": "zuoyi.doc",
-    "id": "010"
-  },
-  {
-    "part": "CDashBoard",
-    "name_cn": "仪表盘",
-    "imageName": "yibiaopan.png",
-    "mediaName": "yibiaopan.mp4",
-    "docName": "yibiaopan.doc",
-    "id": "011"
-  },
-  {
-    "part": "CMotivation",
-    "name_cn": "发动机",
-    "imageName": "fadongji.jpg",
-    "mediaName": "fadongji.mp4",
-    "docName": "fadongji.doc",
-    "id": "012"
-  },
-  {
-    "part": "CTransmission",
-    "name_cn": "变速器",
-    "imageName": "biansuqi.jpg",
-    "mediaName": "biansuqi.mp4",
-    "docName": "biansuqi.doc",
-    "id": "013"
-  },
-  {
-    "part": "CSuspension",
-    "name_cn": "悬挂",
-    "imageName": "xuangua.jpg",
-    "mediaName": "xuangua.mp4",
-    "docName": "xuangua.doc",
-    "id": "014"
-  },
-  {
-    "part": "CTransmissionShaft",
-    "name_cn": "传动轴",
-    "imageName": "chuandongzhou.jpg",
-    "mediaName": "chuandongzhou.mp4",
-    "docName": "chuandongzhou.doc",
-    "id": "015"
-  },
-  {
-    "part": "CTank",
-    "name_cn": "油箱",
-    "imageName": "youxiang.jpg",
-    "mediaName": "youxiang.mp4",
-    "docName": "youxiang.doc",
-    "id": "016"
-  }
-]
+{
+  "carParts": [
+    {
+      "part": "CBettrey",
+      "name_cn": "蓄电池",
+      "imageName": "xudianchi.jpg",
+      "mediaName": "xudianchi.mp4",
+      "docName": "xudianchi.doc",
+      "id": "001"
+    },
+    {
+      "part": "COil",
+      "name_cn": "废液",
+      "imageName": "feiyoufeiye.jpg",
+      "mediaName": "feiyoufeiye.mp4",
+      "docName": "feiyoufeiye.doc",
+      "id": "002"
+    },
+    {
+      "part": "CDoor",
+      "name_cn": "车门",
+      "imageName": "chemen.jpg",
+      "mediaName": "chhemen.mp4",
+      "docName": "chemen.doc",
+      "id": "003"
+    },
+    {
+      "part": "CFontCover",
+      "name_cn": "舱盖",
+      "imageName": "canggai.jpg",
+      "mediaName": "canggai.mp4",
+      "docName": "canggai.doc",
+      "id": "004"
+    },
+    {
+      "part": "CCircle",
+      "name_cn": "车轮",
+      "imageName": "chelun.jpg",
+      "mediaName": "chelun.mp4",
+      "docName": "chelun.doc",
+      "id": "005"
+    },
+    {
+      "part": "CGlass",
+      "name_cn": "挡风玻璃",
+      "imageName": "dangfengboli.jpg",
+      "mediaName": "dangfengboli.mp4",
+      "docName": "dangfengboli.doc",
+      "id": "006"
+    },
+    {
+      "part": "CCarTop",
+      "name_cn": "车顶",
+      "imageName": "cheding.jpg",
+      "mediaName": "cheding.mp4",
+      "docName": "cheding.doc",
+      "id": "007"
+    },
+    {
+      "part": "CColumn",
+      "name_cn": "立柱",
+      "imageName": "lizhu.png",
+      "mediaName": "lizhu.mp4",
+      "docName": "lizhu.doc",
+      "id": "008"
+    },
+    {
+      "part": "CDirection",
+      "name_cn": "方向盘",
+      "imageName": "fangxiangpan.jpg",
+      "mediaName": "fangxiangpan.mp4",
+      "docName": "fangxiangpan.doc",
+      "id": "009"
+    },
+    {
+      "part": "CSeat",
+      "name_cn": "座椅",
+      "imageName": "zuoyi.jpg",
+      "mediaName": "zuoyi.mp4",
+      "docName": "zuoyi.doc",
+      "id": "010"
+    },
+    {
+      "part": "CDashBoard",
+      "name_cn": "仪表盘",
+      "imageName": "yibiaopan.png",
+      "mediaName": "yibiaopan.mp4",
+      "docName": "yibiaopan.doc",
+      "id": "011"
+    },
+    {
+      "part": "CMotivation",
+      "name_cn": "发动机",
+      "imageName": "fadongji.jpg",
+      "mediaName": "fadongji.mp4",
+      "docName": "fadongji.doc",
+      "id": "012"
+    },
+    {
+      "part": "CTransmission",
+      "name_cn": "变速器",
+      "imageName": "biansuqi.jpg",
+      "mediaName": "biansuqi.mp4",
+      "docName": "biansuqi.doc",
+      "id": "013"
+    },
+    {
+      "part": "CSuspension",
+      "name_cn": "悬挂",
+      "imageName": "xuangua.jpg",
+      "mediaName": "xuangua.mp4",
+      "docName": "xuangua.doc",
+      "id": "014"
+    },
+    {
+      "part": "CTransmissionShaft",
+      "name_cn": "传动轴",
+      "imageName": "chuandongzhou.jpg",
+      "mediaName": "chuandongzhou.mp4",
+      "docName": "chuandongzhou.doc",
+      "id": "015"
+    },
+    {
+      "part": "CTank",
+      "name_cn": "油箱",
+      "imageName": "youxiang.jpg",
+      "mediaName": "youxiang.mp4",
+      "docName": "youxiang.doc",
+      "id": "016"
+    }
+  ]
+}
