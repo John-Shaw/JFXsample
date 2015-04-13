@@ -1,0 +1,15 @@
+{
+  "id": "1",
+  "parts": [
+    {
+      "part": "CBattery",
+      "name_cn": "蓄电池",
+      "id": "001"
+    },
+    {
+      "part": "COil",
+      "name_cn": "废液",
+      "id": "002"
+    }
+  ]
+}

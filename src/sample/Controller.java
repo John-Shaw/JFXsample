@@ -76,7 +76,7 @@ public class Controller implements Initializable{
 //        selectBox.setItems(options);
 
         Gson gson = new Gson();
-        String path = localPath + "/temp/Configure.json";
+        String path = localPath + "/configuration/Configure.json";
         conf=gson.fromJson(readDataFromJson(path), Configure.class);
 
         workNumberLabel.setText("工位号："+conf.getId());
