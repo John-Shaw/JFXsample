@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -38,6 +39,9 @@ public class Controller implements Initializable{
     public Button searchBtn;
     public HBox choosenBtnHbox;
     public Label workNumberLabel;
+    public GridPane pane;
+    public HBox workNumberHbox;
+    public SplitPane splitPane;
     private String localPath;
 
     private Configure conf;
@@ -49,6 +53,10 @@ public class Controller implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         localPath = System.getProperty("user.dir").replaceAll("\\\\", "/");
         idTextField.requestFocus();
+
+        choosenBtnHbox.prefWidthProperty().bind(pane.widthProperty());
+        workNumberHbox.prefWidthProperty().bind(pane.widthProperty());
+        splitPane.prefWidthProperty().bind(pane.widthProperty());
 
 //        selectBox.setItems(options);
 
