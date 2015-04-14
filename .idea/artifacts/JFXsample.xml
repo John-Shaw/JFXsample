@@ -5,12 +5,12 @@
       <options>
         <option name="appClass" value="sample.Main" />
         <option name="description" value="all copyrights by John Shaw 2015" />
-        <option name="height" value="500" />
+        <option name="height" value="768" />
         <option name="htmlParamFile" value="" />
         <option name="paramFile" value="" />
-        <option name="title" value="sample" />
-        <option name="vendor" value="" />
-        <option name="width" value="620" />
+        <option name="title" value="CarStatusViewer" />
+        <option name="vendor" value="John Shaw" />
+        <option name="width" value="1024" />
       </options>
     </properties>
     <root id="root">
@@ -19,6 +19,7 @@
       </element>
       <element id="directory" name="lib">
         <element id="library" level="project" name="lib" />
+        <element id="dir-copy" path="$PROJECT_DIR$/lib" />
       </element>
       <element id="directory" name="temp">
         <element id="dir-copy" path="$PROJECT_DIR$/temp" />

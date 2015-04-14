@@ -20,6 +20,7 @@ import javafx.scene.media.MediaView;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.extractor.WordExtractor;
 
+import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -61,7 +62,10 @@ public class Controller implements Initializable{
         workNumberLabel.setText("工位号：" + conf.getWork_number());
 
         for (Part part:conf.getParts()){
-            Button btn = new Button(part.getName_cn());
+            String btnTitle = part.getName_cn();
+            idTextField.setText(btnTitle);
+//            System.out.println(btnTitle);
+            Button btn = new Button(btnTitle);
             btn.setId(part.getId());
             btn.setMinWidth(100);
 
@@ -221,18 +225,23 @@ public class Controller implements Initializable{
 
 
 
-    public String readDataFromJson(String path){
+    public String readDataFromJson(String path) {
         //读取json文件，保存到String json中
         String fileName=path;
         File file=new File(fileName);
         StringBuffer sb = new StringBuffer() ;
         String line;
         BufferedReader br=null;
+
         try {
-            br=new BufferedReader(new FileReader(file));
+            //修复逗比windows下的奇葩乱码问题
+            br=new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
         try {
             while((line=br.readLine())!=null){
                 sb.append(line);

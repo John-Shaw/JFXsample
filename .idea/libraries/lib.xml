@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="lib">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/out/artifacts/JFXsample/lib/poi-scratchpad-3.11-20141221.jar!/" />
-      <root url="jar://$PROJECT_DIR$/out/artifacts/JFXsample/lib/poi-3.11-20141221.jar!/" />
-      <root url="jar://$PROJECT_DIR$/out/artifacts/JFXsample/lib/poi-ooxml-schemas-3.11-20141221.jar!/" />
-      <root url="jar://$PROJECT_DIR$/out/artifacts/JFXsample/lib/poi-excelant-3.11-20141221.jar!/" />
-      <root url="jar://$PROJECT_DIR$/out/artifacts/JFXsample/lib/mysql-connector-java-5.1.34-bin.jar!/" />
-      <root url="jar://$PROJECT_DIR$/out/artifacts/JFXsample/lib/poi-ooxml-3.11-20141221.jar!/" />
-      <root url="jar:///Library/Java/Extensions/GSON/gson-2.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/gson-2.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mysql-connector-java-5.1.34-bin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-3.11-20141221.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-excelant-3.11-20141221.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-ooxml-3.11-20141221.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-ooxml-schemas-3.11-20141221.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-scratchpad-3.11-20141221.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
