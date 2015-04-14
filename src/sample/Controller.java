@@ -62,10 +62,8 @@ public class Controller implements Initializable{
         workNumberLabel.setText("工位号：" + conf.getWork_number());
 
         for (Part part:conf.getParts()){
-            String btnTitle = part.getName_cn();
-            idTextField.setText(btnTitle);
-//            System.out.println(btnTitle);
-            Button btn = new Button(btnTitle);
+
+            Button btn = new Button(part.getName_cn());
             btn.setId(part.getId());
             btn.setMinWidth(100);
 
