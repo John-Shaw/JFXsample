@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
@@ -39,9 +40,10 @@ public class Controller implements Initializable{
     public Button searchBtn;
     public HBox choosenBtnHbox;
     public Label workNumberLabel;
-    public GridPane pane;
+//    public GridPane pane;
     public HBox workNumberHbox;
     public SplitPane splitPane;
+    public FlowPane panel;
     private String localPath;
 
     private Configure conf;
@@ -54,9 +56,13 @@ public class Controller implements Initializable{
         localPath = System.getProperty("user.dir").replaceAll("\\\\", "/");
         idTextField.requestFocus();
 
-        choosenBtnHbox.prefWidthProperty().bind(pane.widthProperty());
-        workNumberHbox.prefWidthProperty().bind(pane.widthProperty());
-        splitPane.prefWidthProperty().bind(pane.widthProperty());
+        choosenBtnHbox.prefWidthProperty().bind(panel.widthProperty());
+        workNumberHbox.prefWidthProperty().bind(panel.widthProperty());
+        splitPane.prefWidthProperty().bind(panel.widthProperty());
+        wordViewer.prefWidthProperty().bind(wordPanel.widthProperty());
+        imageView.fitWidthProperty().bind(vedioPanel.widthProperty());
+        //todo magic number
+        imageView.fitHeightProperty().bindBidirectional(imageView.fitWidthProperty());
 
 //        selectBox.setItems(options);
 
@@ -142,10 +148,10 @@ public class Controller implements Initializable{
 
         if (mediaFile.exists()){
             Image img = new Image(mediaFile.toURI().toString());
-            double aspect = img.getWidth()/img.getHeight();
+//            double aspect = img.getWidth()/img.getHeight();
             imageView.setImage(img);
-            imageView.fitWidthProperty().bind(vedioPanel.widthProperty());
-            imageView.setFitHeight(vedioPanel.getWidth()/aspect);
+//            imageView.fitWidthProperty().bind(vedioPanel.widthProperty());
+//            imageView.setFitHeight(vedioPanel.getWidth()/aspect);
             return;
         }
 
