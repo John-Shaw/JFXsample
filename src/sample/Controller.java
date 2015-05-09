@@ -14,7 +14,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -22,7 +21,6 @@ import javafx.scene.media.MediaView;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.extractor.WordExtractor;
 
-import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -49,12 +47,15 @@ public class Controller implements Initializable{
     private Configure conf;
     private CarParts parts;
 
+    private Boolean isPlayMedia;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         localPath = System.getProperty("user.dir").replaceAll("\\\\", "/");
         idTextField.requestFocus();
+
+        isPlayMedia = false;
 
         choosenBtnHbox.prefWidthProperty().bind(panel.widthProperty());
         workNumberHbox.prefWidthProperty().bind(panel.widthProperty());
@@ -63,6 +64,10 @@ public class Controller implements Initializable{
         imageView.fitWidthProperty().bind(vedioPanel.widthProperty());
         //todo magic number
         imageView.fitHeightProperty().bindBidirectional(imageView.fitWidthProperty());
+
+        mediaView.fitWidthProperty().bind(vedioPanel.widthProperty());
+        mediaView.fitHeightProperty().bindBidirectional(mediaView.fitWidthProperty());
+//        mediaView.setLayoutX();
 
 //        selectBox.setItems(options);
 
@@ -90,8 +95,8 @@ public class Controller implements Initializable{
                     btn.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
-//                            setDisplayView(carPart.getMediaName());
-                            setDisplayView(carPart.getImageName());
+                            setDisplayMediaView(carPart.getMediaName());
+                            setDisplayImageView(carPart.getImageName());
                             try {
                                 setTextView(carPart.getDocName());
                             } catch (IOException e) {
@@ -117,41 +122,39 @@ public class Controller implements Initializable{
 
     }
 
-
-
-    private void setDisplayView(String partName){
+    private void setDisplayMediaView(String partName){
+        if(mediaView.getMediaPlayer() != null){
+            mediaView.getMediaPlayer().stop();
+        }
         File mediaFile = new File(localPath +"/temp/"+partName);
-        if (mediaFile.exists() && partName.endsWith(".mp4")){
+        if (mediaFile.exists() ){
             Media media = new Media(mediaFile.toURI().toString());
-            final MediaPlayer player = new MediaPlayer(media);
+            MediaPlayer player = new MediaPlayer(media);
             mediaView.setMediaPlayer(player);
+
             player.play();
-            player.setOnReady(new Runnable() {
-                @Override
-                public void run() {
-                    int w = player.getMedia().getWidth();
-                    int h = player.getMedia().getHeight();
 
-                    if (w > vedioPanel.getWidth())
-                        w = (int) vedioPanel.getWidth();
-                    if (h > vedioPanel.getHeight())
-                        h = (int) vedioPanel.getHeight();
+            isPlayMedia = true;
+            return;
+        }
+        isPlayMedia = false;
 
-                    mediaView.setFitWidth(w);
-                    mediaView.setFitHeight(h);
+    }
 
-                }
-            });
+    private void setDisplayImageView(String partName){
+
+        if(isPlayMedia){
             return;
         }
 
+        if(mediaView.getMediaPlayer() != null){
+            mediaView.getMediaPlayer().stop();
+        }
 
+        File mediaFile = new File(localPath +"/temp/"+partName);
         if (mediaFile.exists()){
             Image img = new Image(mediaFile.toURI().toString());
-//            double aspect = img.getWidth()/img.getHeight();
             imageView.setImage(img);
-//            imageView.fitWidthProperty().bind(vedioPanel.widthProperty());
-//            imageView.setFitHeight(vedioPanel.getWidth()/aspect);
             return;
         }
 
@@ -192,9 +195,7 @@ public class Controller implements Initializable{
         }
 
     }
-
-    public void searchClick(ActionEvent actionEvent) throws IOException {
-
+    public void searchID(ActionEvent actionEvent) throws IOException  {
         if (this.idTextField.getText().isEmpty()){
             Alert mesBox = new Alert(Alert.AlertType.ERROR);
             mesBox.setTitle("ERROR!");
@@ -206,35 +207,19 @@ public class Controller implements Initializable{
             btn.fire();
             btn.requestFocus();
         }
+    }
 
+    public void updateDB(ActionEvent actionEvent) {
+        Alert mesBox = new Alert(Alert.AlertType.INFORMATION);
+        mesBox.setTitle("更新!");
+        mesBox.setHeaderText(null);
+        mesBox.setContentText("您的数据已为最新");
+        mesBox.showAndWait();
     }
 
         public String pathFix(String path){
             return path.replaceAll("\\\\", "/");
         }
-
-        public void testDBConnect(ActionEvent actionEvent) {
-//            System.out.println(parts.getCarParts()[1].getImageName());
-//            db =new DBConnector();
-//            db.testDB();
-//            System.out.println(db.httpDownload("","temp/lizhu.doc"));
-//            db.testDownloadFiel("32");
-//            String path = localPath + "/temp/samples.json";
-//            readDataFromJson(path);
-//
-//            System.out.println(carMes.getType()[10].getOption()[0].getLabel());
-
-//            String path = localPath + "/temp/Configure.json";
-//            readDataFromJson(path);
-//            System.out.println(conf.getParts().length);
-            Alert mesBox = new Alert(Alert.AlertType.INFORMATION);
-            mesBox.setTitle("更新!");
-            mesBox.setHeaderText(null);
-            mesBox.setContentText("您的数据已为最新");
-            mesBox.showAndWait();
-
-        }
-
 
 
     public String readDataFromJson(String path) {
@@ -290,4 +275,6 @@ public class Controller implements Initializable{
             searchBtn.requestFocus();
         }
     }
+
+
 }

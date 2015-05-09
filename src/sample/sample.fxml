@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
@@ -9,8 +10,7 @@
 <?import javafx.scene.media.*?>
 <?import javafx.scene.text.Font?>
 
-
-        <FlowPane columnHalignment="CENTER" fx:id="panel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<FlowPane fx:id="panel" columnHalignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
             <children>
                 <HBox fx:id="choosenBtnHbox" alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="999.0" spacing="10">
                     <children>
@@ -19,11 +19,11 @@
                         <Font name="System Bold" size="18.0" />
                      </font></Label>
                         <TextField fx:id="idTextField" onAction="#onEnter" onKeyPressed="#onRightPress" prefHeight="30.0" prefWidth="105.0" />
-                        <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#searchClick" onKeyPressed="#onSearchEnter" prefHeight="30.0" prefWidth="100.0" text="查询">
+                        <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#searchID" onKeyPressed="#onSearchEnter" prefHeight="30.0" prefWidth="100.0" text="查询">
                             <HBox.margin>
                                 <Insets />
                             </HBox.margin></Button>
-                        <Button mnemonicParsing="false" onAction="#testDBConnect" prefHeight="30.0" prefWidth="100.0" text="更新数据">
+                        <Button mnemonicParsing="false" onAction="#updateDB" prefHeight="30.0" prefWidth="100.0" text="更新数据">
                             <HBox.margin>
                                 <Insets />
                             </HBox.margin>
@@ -38,16 +38,16 @@
                         <Insets left="10.0" top="10.0" />
                     </FlowPane.margin>
                 </HBox>
-                <SplitPane fx:id="splitPane" dividerPositions="0.65" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1160.0">
+                <SplitPane fx:id="splitPane" dividerPositions="0.5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1160.0">
                     <items>
                         <AnchorPane fx:id="vedioPanel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="660.0">
                             <children>
-                                <MediaView fx:id="mediaView" fitHeight="400.0" fitWidth="300.0" layoutY="139.0" AnchorPane.bottomAnchor="139.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="195.0" AnchorPane.topAnchor="139.0" />
-                                <ImageView fx:id="imageView" fitHeight="450.0" fitWidth="660.0" layoutX="0.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                <MediaView fx:id="mediaView" fitHeight="300.0" fitWidth="400.0" layoutY="40.0" AnchorPane.bottomAnchor="360.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="40.0" />
+                                <ImageView fx:id="imageView" fitHeight="450.0" fitWidth="660.0" layoutX="6.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
                             </children></AnchorPane>
                         <AnchorPane fx:id="wordPanel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="500.0">
                      <children>
-                                <TextArea fx:id="wordViewer" prefHeight="700.0" prefWidth="500.0" minHeight="0" minWidth="0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+                                <TextArea fx:id="wordViewer" minHeight="0" minWidth="0" prefHeight="700.0" prefWidth="500.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
                                     <font>
                                         <Font size="17.0" />
                                     </font>
@@ -76,4 +76,3 @@
             </HBox>
             </children>
         </FlowPane>
-
