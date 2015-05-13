@@ -126,8 +126,10 @@ public class Controller implements Initializable{
         if(mediaView.getMediaPlayer() != null){
             mediaView.getMediaPlayer().stop();
         }
+        imageView.setVisible(false);
         File mediaFile = new File(localPath +"/temp/"+partName);
         if (mediaFile.exists() ){
+            mediaView.setVisible(true);
             Media media = new Media(mediaFile.toURI().toString());
             MediaPlayer player = new MediaPlayer(media);
             mediaView.setMediaPlayer(player);
@@ -139,6 +141,7 @@ public class Controller implements Initializable{
         }
         isPlayMedia = false;
 
+
     }
 
     private void setDisplayImageView(String partName){
@@ -146,13 +149,14 @@ public class Controller implements Initializable{
         if(isPlayMedia){
             return;
         }
-
+        mediaView.setVisible(false);
         if(mediaView.getMediaPlayer() != null){
             mediaView.getMediaPlayer().stop();
         }
 
         File mediaFile = new File(localPath +"/temp/"+partName);
         if (mediaFile.exists()){
+            imageView.setVisible(true);
             Image img = new Image(mediaFile.toURI().toString());
             imageView.setImage(img);
             return;
